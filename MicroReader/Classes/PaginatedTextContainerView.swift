@@ -13,64 +13,6 @@ class PaginatedTextContainerView: UIView {
     private var layoutManager:NSLayoutManager!
     private var scrollView:UIScrollView!
     
-    private func renderTextStorage() {
-
-        println("renderTextStorage!")
-        
-        var textContainerSize = CGSizeMake(self.bounds.width / CGFloat(self.columns), self.bounds.height)
-        var currentXOffset: CGFloat = 0
-        var lastRenderedGlyph:Int = 0
-        
-        if textViews.isEmpty {
-            
-            while (lastRenderedGlyph < layoutManager.numberOfGlyphs) {
-                
-                println("lastRenderedGlyph is \(lastRenderedGlyph) and total number of Glyphs: \(layoutManager.numberOfGlyphs)")
-                
-                for index in 1...columns {
-                    
-                    let textContainer = NSTextContainer(size: textContainerSize)
-                    self.layoutManager.addTextContainer(textContainer)
-                    let textViewFrame = CGRectMake(currentXOffset, 0, textContainerSize.width, textContainerSize.height)
-                    let textView = UITextView(frame:textViewFrame, textContainer: textContainer)
-                    //textView.setTranslatesAutoresizingMaskIntoConstraints(false)
-                    textView.scrollEnabled = false
-                    
-                    scrollView.addSubview(textView)
-                    textViews.append(textView)
-                    
-                    currentXOffset += CGRectGetWidth(textViewFrame);
-                }
-                
-                // And find the index of the glyph we've just rendered
-                let lastTextContainer = layoutManager.textContainers.last as! NSTextContainer
-                lastRenderedGlyph = NSMaxRange(layoutManager.glyphRangeForTextContainer(lastTextContainer))
-            }
-            
-        }
-        else {
-            
-            for textView in textViews {
-                let textViewFrame = CGRectMake(currentXOffset, 0, textContainerSize.width, textContainerSize.height)
-                textView.frame = textViewFrame
-                  currentXOffset += CGRectGetWidth(textViewFrame);
-            }
-        }
-
-        
-        let contentSize = CGSizeMake(currentXOffset, CGRectGetHeight(scrollView.bounds))
-        scrollView.contentSize = contentSize
-    }
-    
-    var textStorage:NSTextStorage? {
-        
-        willSet (newtextStorage) {
-            
-            newtextStorage!.addLayoutManager(layoutManager)
-            setNeedsDisplay()
-        }
-        
-    }
     private var columns:Int = 2
     
     private var textViews:[UITextView] = []
@@ -101,6 +43,77 @@ class PaginatedTextContainerView: UIView {
     override class func requiresConstraintBasedLayout() -> Bool {
         return true
     }
+    
+    private func addImageInTextContainer (textContainer:NSTextContainer, textView:UITextView) {
+        
+        let  butterfly = UIImageView(image: UIImage(named: "250px-267Beautifly"))
+        butterfly.frame = CGRectMake(0, 0, 125, 125)
+        
+        textView.addSubview(butterfly)
+       
+        // Simply set the exclusion path
+        let bezierPath = UIBezierPath(roundedRect: butterfly.frame, byRoundingCorners: UIRectCorner.AllCorners, cornerRadii: CGSizeMake(10, 10))
+        
+        textContainer.exclusionPaths = [bezierPath]
+    }
+    
+    private func renderTextStorage() {
+        
+        var textContainerSize = CGSizeMake(self.bounds.width / CGFloat(self.columns), self.bounds.height)
+        var currentXOffset: CGFloat = 0
+        var lastRenderedGlyph:Int = 0
+        
+        if textViews.isEmpty {
+            
+            while (lastRenderedGlyph < layoutManager.numberOfGlyphs) {
+                
+                println("lastRenderedGlyph is \(lastRenderedGlyph) and total number of Glyphs: \(layoutManager.numberOfGlyphs)")
+                
+                for index in 1...columns {
+                    
+                    let textContainer = NSTextContainer(size: textContainerSize)
+                    self.layoutManager.addTextContainer(textContainer)
+                    let textViewFrame = CGRectMake(currentXOffset, 0, textContainerSize.width, textContainerSize.height)
+                    let textView = UITextView(frame:textViewFrame, textContainer: textContainer)
+                    //textView.setTranslatesAutoresizingMaskIntoConstraints(false)
+                    addImageInTextContainer(textContainer,textView: textView)
+                    textView.scrollEnabled = false
+                    
+                    scrollView.addSubview(textView)
+                    textViews.append(textView)
+                    
+                    currentXOffset += CGRectGetWidth(textViewFrame)
+                }
+                
+                // And find the index of the glyph we've just rendered
+                let lastTextContainer = layoutManager.textContainers.last as! NSTextContainer
+                lastRenderedGlyph = NSMaxRange(layoutManager.glyphRangeForTextContainer(lastTextContainer))
+            }
+            
+        }
+        else {
+            
+            for textView in textViews {
+                let textViewFrame = CGRectMake(currentXOffset, 0, textContainerSize.width, textContainerSize.height)
+                textView.frame = textViewFrame
+                  currentXOffset += CGRectGetWidth(textViewFrame);
+            }
+        }
+
+        
+        let contentSize = CGSizeMake(currentXOffset, CGRectGetHeight(scrollView.bounds))
+        scrollView.contentSize = contentSize
+    }
+    
+    var textStorage:NSTextStorage? {
+        
+        willSet (newtextStorage) {
+            
+            newtextStorage!.addLayoutManager(layoutManager)
+            setNeedsDisplay()
+        }
+    }
+
     
     private func setUpScrollView() {
         

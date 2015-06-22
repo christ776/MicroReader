@@ -12,20 +12,6 @@ class TXTFileTextStorage: NSTextStorage {
     
     private var concreteString:NSMutableAttributedString!
     
-//    class func storage(textFileString txtFile:String) -> NSTextStorage? {
-//        
-//        // Import the content into a text storage object
-//        if let contentURL = NSBundle.mainBundle().URLForResource(txtFile.stringByDeletingPathExtension,withExtension:"txt") {
-//            
-//            let documentText = NSMutableAttributedString(fileURL: contentURL, options: [NSDocumentTypeDocumentAttribute:NSPlainTextDocumentType], documentAttributes: nil, error: nil)
-////            self.concreteString = NSMutableAttributedString()
-////            self.concreteString.appendAttributedString(documentText!)
-//            return TXTFileTextStorage(fileURL: contentURL, options: [NSDocumentTypeDocumentAttribute:NSPlainTextDocumentType], documentAttributes: nil, error: nil)
-//            
-//        }
-//        return nil
-//    }
-    
     override init?(fileURL url: NSURL!, options: [NSObject : AnyObject]!, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>, error: NSErrorPointer) {
         
         // Import the content into a text storage object
