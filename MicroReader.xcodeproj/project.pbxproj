@@ -13,6 +13,12 @@
 		AA08F6881B2F59FC00F7E9A9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA08F6871B2F59FC00F7E9A9 /* Images.xcassets */; };
 		AA08F68B1B2F59FC00F7E9A9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA08F6891B2F59FC00F7E9A9 /* LaunchScreen.xib */; };
 		AA08F6971B2F59FC00F7E9A9 /* MicroReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA08F6961B2F59FC00F7E9A9 /* MicroReaderTests.swift */; };
+		AAD6BCFE1B377B6F0048585B /* Latin-Lipsum.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAD6BCFD1B377B6F0048585B /* Latin-Lipsum.txt */; };
+		AAD6BCFF1B377B6F0048585B /* Latin-Lipsum.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAD6BCFD1B377B6F0048585B /* Latin-Lipsum.txt */; };
+		AAE0033F1B30BAC60042F649 /* PaginatedTextContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE0033E1B30BAC60042F649 /* PaginatedTextContainerView.swift */; };
+		AAE003401B30BAC60042F649 /* PaginatedTextContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE0033E1B30BAC60042F649 /* PaginatedTextContainerView.swift */; };
+		AAE003431B30E2690042F649 /* TXTFileTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE003421B30E2690042F649 /* TXTFileTextStorage.swift */; };
+		AAE003441B30E2690042F649 /* TXTFileTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE003421B30E2690042F649 /* TXTFileTextStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +42,9 @@
 		AA08F6901B2F59FC00F7E9A9 /* MicroReaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MicroReaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA08F6951B2F59FC00F7E9A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA08F6961B2F59FC00F7E9A9 /* MicroReaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicroReaderTests.swift; sourceTree = "<group>"; };
+		AAD6BCFD1B377B6F0048585B /* Latin-Lipsum.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Latin-Lipsum.txt"; sourceTree = "<group>"; };
+		AAE0033E1B30BAC60042F649 /* PaginatedTextContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaginatedTextContainerView.swift; path = Classes/PaginatedTextContainerView.swift; sourceTree = "<group>"; };
+		AAE003421B30E2690042F649 /* TXTFileTextStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TXTFileTextStorage.swift; path = Classes/TXTFileTextStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,12 +86,15 @@
 		AA08F67D1B2F59FC00F7E9A9 /* MicroReader */ = {
 			isa = PBXGroup;
 			children = (
+				AAD6BCF31B31A69F0048585B /* Text files */,
+				AAE003411B30E2340042F649 /* Storage */,
 				AA08F6801B2F59FC00F7E9A9 /* AppDelegate.swift */,
 				AA08F6821B2F59FC00F7E9A9 /* ViewController.swift */,
 				AA08F6841B2F59FC00F7E9A9 /* Main.storyboard */,
 				AA08F6871B2F59FC00F7E9A9 /* Images.xcassets */,
 				AA08F6891B2F59FC00F7E9A9 /* LaunchScreen.xib */,
 				AA08F67E1B2F59FC00F7E9A9 /* Supporting Files */,
+				AAE0033E1B30BAC60042F649 /* PaginatedTextContainerView.swift */,
 			);
 			path = MicroReader;
 			sourceTree = "<group>";
@@ -110,6 +122,22 @@
 				AA08F6951B2F59FC00F7E9A9 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AAD6BCF31B31A69F0048585B /* Text files */ = {
+			isa = PBXGroup;
+			children = (
+				AAD6BCFD1B377B6F0048585B /* Latin-Lipsum.txt */,
+			);
+			name = "Text files";
+			sourceTree = "<group>";
+		};
+		AAE003411B30E2340042F649 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				AAE003421B30E2690042F649 /* TXTFileTextStorage.swift */,
+			);
+			name = Storage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA08F6861B2F59FC00F7E9A9 /* Main.storyboard in Resources */,
+				AAD6BCFE1B377B6F0048585B /* Latin-Lipsum.txt in Resources */,
 				AA08F68B1B2F59FC00F7E9A9 /* LaunchScreen.xib in Resources */,
 				AA08F6881B2F59FC00F7E9A9 /* Images.xcassets in Resources */,
 			);
@@ -202,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAD6BCFF1B377B6F0048585B /* Latin-Lipsum.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +243,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA08F6831B2F59FC00F7E9A9 /* ViewController.swift in Sources */,
+				AAE003431B30E2690042F649 /* TXTFileTextStorage.swift in Sources */,
+				AAE0033F1B30BAC60042F649 /* PaginatedTextContainerView.swift in Sources */,
 				AA08F6811B2F59FC00F7E9A9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,7 +253,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAE003401B30BAC60042F649 /* PaginatedTextContainerView.swift in Sources */,
 				AA08F6971B2F59FC00F7E9A9 /* MicroReaderTests.swift in Sources */,
+				AAE003441B30E2690042F649 /* TXTFileTextStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +445,7 @@
 				AA08F69C1B2F59FC00F7E9A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AA08F69D1B2F59FC00F7E9A9 /* Build configuration list for PBXNativeTarget "MicroReaderTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +454,7 @@
 				AA08F69F1B2F59FC00F7E9A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

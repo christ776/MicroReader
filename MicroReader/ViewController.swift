@@ -10,16 +10,23 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet var textViewContainer: PaginatedTextContainerView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+         if let contentURL = NSBundle.mainBundle().URLForResource("Latin-Lipsum",withExtension:"txt") {
+            
+            if let textStorage = NSTextStorage(fileURL: contentURL, options: nil, documentAttributes: nil, error: nil) {
+                textViewContainer.textStorage = textStorage
+            }
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        //textViewContainer.layoutIfNeeded()
+        textViewContainer.setNeedsDisplay()
     }
-
-
 }
 
