@@ -57,9 +57,36 @@ class PaginatedTextContainerView: UIView {
         textContainer.exclusionPaths = [bezierPath]
     }
     
+    private func putTextInisideCircularArea(textContainer:NSTextContainer) {
+        
+        var ratio:CGFloat = 0
+        
+        if textContainer.size.width > textContainer.size.height {
+            ratio = textContainer.size.height
+        }
+        else {
+            ratio = textContainer.size.width
+        }
+        
+        let rect = CGRectMake(0, 0, ratio, ratio)
+        
+        let overlayPath = UIBezierPath(rect:rect)
+     
+        
+        var smallerRect = CGRectMake(rect.origin.x, rect.origin.y, rect.width, rect.height)
+        
+        let bezierPath = UIBezierPath(roundedRect:smallerRect,cornerRadius:smallerRect.height / 2)
+        
+        overlayPath.appendPath(bezierPath)
+        overlayPath.usesEvenOddFillRule = true
+        overlayPath.fill()
+        
+        textContainer.exclusionPaths = [overlayPath]
+    }
+    
     private func renderTextStorage() {
         
-        var textContainerSize = CGSizeMake(self.bounds.width / CGFloat(self.columns), self.bounds.height)
+        var textContainerSize = CGSizeMake(self.scrollView.bounds.width / CGFloat(self.columns), self.scrollView.bounds.height)
         var currentXOffset: CGFloat = 0
         var lastRenderedGlyph:Int = 0
         
@@ -75,8 +102,10 @@ class PaginatedTextContainerView: UIView {
                     self.layoutManager.addTextContainer(textContainer)
                     let textViewFrame = CGRectMake(currentXOffset, 0, textContainerSize.width, textContainerSize.height)
                     let textView = UITextView(frame:textViewFrame, textContainer: textContainer)
+                    textView.textAlignment = NSTextAlignment.Justified
                     //textView.setTranslatesAutoresizingMaskIntoConstraints(false)
-                    addImageInTextContainer(textContainer,textView: textView)
+                    //addImageInTextContainer(textContainer,textView: textView)
+                    putTextInisideCircularArea(textContainer)
                     textView.scrollEnabled = false
                     
                     scrollView.addSubview(textView)
@@ -113,7 +142,6 @@ class PaginatedTextContainerView: UIView {
             setNeedsDisplay()
         }
     }
-
     
     private func setUpScrollView() {
         
@@ -121,23 +149,6 @@ class PaginatedTextContainerView: UIView {
         scrollView.pagingEnabled = true
         self.addSubview(self.scrollView)
         scrollView.setTranslatesAutoresizingMaskIntoConstraints(false)
-    }
-    
-    private func setUpColumns() {
-        
-        for index in 1...columns {
-            
-            let textContainer = NSTextContainer()
-            self.layoutManager.addTextContainer(textContainer)
-            let textView = UITextView(frame: CGRectZero, textContainer: textContainer)
-            textView.text = "Hello !!"
-            textView.setTranslatesAutoresizingMaskIntoConstraints(false)
-            textView.scrollEnabled = false
-      
-            self.scrollView.addSubview(textView)
-            textViews.append(textView)
-        }
-        self.setNeedsUpdateConstraints()
     }
     
     private func setUpConstraints() {
@@ -153,11 +164,6 @@ class PaginatedTextContainerView: UIView {
         var constraints = [NSLayoutConstraint]()
 
     }
-    
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        renderTextStorage()
-//    }
     
     override func updateConstraints() {
         setUpConstraints()
