@@ -19,23 +19,23 @@ class PaginatedTextContainerView: UIView {
     
     convenience init(columns:Int, textStorage:NSTextStorage) {
         self.init(frame:CGRectZero)
-        self.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.columns = columns
         self.textStorage = textStorage
         self.layoutManager = NSLayoutManager()
         setUpScrollView()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.layoutManager = NSLayoutManager()
         setUpScrollView()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.layoutManager = NSLayoutManager()
         setUpScrollView()
     }
@@ -73,7 +73,7 @@ class PaginatedTextContainerView: UIView {
         let overlayPath = UIBezierPath(rect:rect)
      
         
-        var smallerRect = CGRectMake(rect.origin.x, rect.origin.y, rect.width, rect.height)
+        let smallerRect = CGRectMake(rect.origin.x, rect.origin.y, rect.width, rect.height)
         
         let bezierPath = UIBezierPath(roundedRect:smallerRect,cornerRadius:smallerRect.height / 2)
         
@@ -86,7 +86,7 @@ class PaginatedTextContainerView: UIView {
     
     private func renderTextStorage() {
         
-        var textContainerSize = CGSizeMake(self.scrollView.bounds.width / CGFloat(self.columns), self.scrollView.bounds.height)
+        let textContainerSize = CGSizeMake(self.scrollView.bounds.width / CGFloat(self.columns), self.scrollView.bounds.height)
         var currentXOffset: CGFloat = 0
         var lastRenderedGlyph:Int = 0
         
@@ -94,15 +94,15 @@ class PaginatedTextContainerView: UIView {
             
             while (lastRenderedGlyph < layoutManager.numberOfGlyphs) {
                 
-                println("lastRenderedGlyph is \(lastRenderedGlyph) and total number of Glyphs: \(layoutManager.numberOfGlyphs)")
+                print("lastRenderedGlyph is \(lastRenderedGlyph) and total number of Glyphs: \(layoutManager.numberOfGlyphs)")
                 
-                for index in 1...columns {
+                for _ in 1...columns {
                     
                     let textContainer = NSTextContainer(size: textContainerSize)
                     self.layoutManager.addTextContainer(textContainer)
                     let textViewFrame = CGRectMake(currentXOffset, 0, textContainerSize.width, textContainerSize.height)
                     let textView = UITextView(frame:textViewFrame, textContainer: textContainer)
-                    textView.textAlignment = NSTextAlignment.Justified
+                    textView.textAlignment = NSTextAlignment.Center
                     //textView.setTranslatesAutoresizingMaskIntoConstraints(false)
                     //addImageInTextContainer(textContainer,textView: textView)
                     putTextInisideCircularArea(textContainer)
@@ -115,8 +115,8 @@ class PaginatedTextContainerView: UIView {
                 }
                 
                 // And find the index of the glyph we've just rendered
-                let lastTextContainer = layoutManager.textContainers.last as! NSTextContainer
-                lastRenderedGlyph = NSMaxRange(layoutManager.glyphRangeForTextContainer(lastTextContainer))
+                let lastTextContainer = layoutManager.textContainers.last
+                lastRenderedGlyph = NSMaxRange(layoutManager.glyphRangeForTextContainer(lastTextContainer!))
             }
             
         }
@@ -148,7 +148,7 @@ class PaginatedTextContainerView: UIView {
         self.scrollView = UIScrollView()
         scrollView.pagingEnabled = true
         self.addSubview(self.scrollView)
-        scrollView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setUpConstraints() {
@@ -161,7 +161,7 @@ class PaginatedTextContainerView: UIView {
         
         self.addConstraint(NSLayoutConstraint(item: self.scrollView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0))
         
-        var constraints = [NSLayoutConstraint]()
+        _ = [NSLayoutConstraint]()
 
     }
     

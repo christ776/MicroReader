@@ -23,8 +23,12 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
          if let contentURL = NSBundle.mainBundle().URLForResource("Latin-Lipsum",withExtension:"txt") {
             
-            if let textStorage = NSTextStorage(fileURL: contentURL, options: nil, documentAttributes: nil, error: nil) {
+            do {
+                let textStorage = try NSTextStorage(URL: contentURL, options: [:], documentAttributes: nil)
                 textViewContainer.textStorage = textStorage
+            }
+            catch _ {
+                
             }
         }
     }

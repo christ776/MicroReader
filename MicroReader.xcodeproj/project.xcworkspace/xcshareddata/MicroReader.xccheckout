@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>D690A005-2E03-4CD0-B60B-BC1E04C10BAD</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>MicroReader</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>D12F8950AD2DC56C2F50A752C4EB4309EB5518F3</key>
 		<string>https://github.com/christ776/MicroReader.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>MicroReader.xcodeproj/project.xcworkspace</string>
+	<string>MicroReader.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>D12F8950AD2DC56C2F50A752C4EB4309EB5518F3</key>
